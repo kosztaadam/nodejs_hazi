@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-hazi",
+  "version": "1.0.0",
+  "description": "Sportfogado portal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kosztaadam/nodejs_hazi.git"
+  },
+  "keywords": [
+    "node.js",
+    "express"
+  ],
+  "author": "Adam Koszta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kosztaadam/nodejs_hazi/issues"
+  },
+  "homepage": "https://github.com/kosztaadam/nodejs_hazi#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
