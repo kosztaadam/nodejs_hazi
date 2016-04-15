@@ -1,0 +1,164 @@
+<%- include('header') %>
+<%- include('admin_header') %>
+
+<!-- content -->
+<div class="container">
+    <div class="page-header">
+        <h1>Admin page</h1>
+    </div>
+    <div class="page-header">
+        <h3>Bets</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Event</th>
+                    <th class="text-center">Bet</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% userBets.forEach(function(item){ %>
+                <tr>
+                    <td class="text-center"><input type="checkbox"/></td>
+                    <td><%= item.name %></td>
+                    <td><%= item.event %></td>
+                    <td class="text-center"><%= item.bet %></td>
+                </tr>
+                <!-- Pelda egy item-re:
+                <tr>
+                    <td class="text-center"><input type="checkbox"/></td>
+                    <td>Bela</td>
+                    <td>Aston Villa - Tottenham, Sun 13 Mar 17:00</td>
+                    <td class="text-center">1</td>
+                </tr>
+                -->
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p>
+        <a href=/user/<%= user.id %>/<%= item.id %>/delete" class="btn btn-danger">Delete</a>
+    </p>
+
+    <div class="page-header">
+        <h3>Profiles</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th class="text-center">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% users.forEach(function(item){ %>
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td><%= item.name %></td>
+                    <td class="text-center"><%= item.bank %></td>
+                </tr>
+                <!-- Pelda egy item-re:
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td>Aladar</td>
+                    <td class="text-center">15000 HUF</td>
+                </tr>
+                -->
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p>
+        <a href="modify_account/<%= user.id %>" class="btn btn-default">Modify</a>
+        <a href="/user/<%= user.id %>/delete" class="btn btn-danger">Delete</a>
+    </p>
+
+    <div class="page-header">
+        <h3>Add bet</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <form method="post">
+                <div class="form-group">
+                    <label for="event">Event</label>
+                    <input type="text" class="form-control" id="event" placeholder="Event">
+                    <label for="home-odds">Home odds</label>
+                    <input type="number" step="0.1" class="form-control" id="home-odds" placeholder="Home-odds">
+                    <label for="home-odds">Draw odds</label>
+                    <input type="number" step="0.1" class="form-control" id="draw-odds" placeholder="Draw-odds">
+                    <label for="home-odds">Away odds</label>
+                    <input type="number" step="0.1" class="form-control" id="away-odds" placeholder="Away-odds">
+
+                    <!-- Pelda egy bet-re:
+                    <tr>
+                        <td>Everton - Arsenal, Sat 19 Mar 13:45</td>
+                        <td class="text-center"><a href="newbet.html">2.60</a></td>
+                        <td class="text-center"><a href="newbet.html">3.25</a></td>
+                        <td class="text-center"><a href="newbet.html">2.60</a></td>
+                    </tr>
+                    -->
+                </div>
+                <input type="submit" class="btn btn-primary" value="Add"/>
+            </form>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h3>All events</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-sd-6">
+            <form method="post">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Event</th>
+                        <th class="text-center">1</th>
+                        <th class="text-center">X</th>
+                        <th class="text-center">2</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% bets.forEach(function(item){ %>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td><%= item.id %></td>
+                        <td><%= item.name %></td>
+                        <td class="text-center"><%= item.homeodds %></td>
+                        <td class="text-center"><%= item.drawodds %></td>
+                        <td class="text-center"><%= item.awayodds %></td>
+                    </tr>
+                    <!-- Pelda egy item-re:
+                    <tr>
+                        <td>2</td>
+                        <td>Everton - Arsenal, Sat 19 Mar 13:45</td>
+                        <td class="text-center"><a href="newbet.html">2.60</a></td>
+                        <td class="text-center"><a href="newbet.html">3.25</a></td>
+                        <td class="text-center"><a href="newbet.html">2.60</a></td>
+                    </tr>
+                    -->
+                    <% }); %>
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-danger" value="Close and Delete"/>
+            </form>
+        </div>
+
+</div>
+<%- include('footer') %>
