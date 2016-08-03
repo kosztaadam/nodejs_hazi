@@ -6,9 +6,12 @@
 /**
  * Ha a felhasznalo be van jelentkezve, atiranyitjuk /
  */
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
 
     return function (req, res, next) {
+        if (typeof req.session.userid !== 'undefined') {
+            return res.redirect('/');
+        }
         return next();
     };
 

@@ -2,17 +2,27 @@
  * Created by Koszta Ádám on 2016. 03. 28..
  */
 
+var requireOption = require('../generic/dependency').requireOption;
+
 /**
  * Osszes fogadasi esemeny lekerdezese
  */
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
+
+    var betModel = requireOption(objectRepository, 'betModel');
 
     return function (req, res, next) {
-        /** osszes fogadas lekerdezese
-         * ezzel lehet a fogadasi listat megjeleniteni
-         */
+        // osszes fogadasi esemeny lekerdezese
+        betModel.find({}, function (err, results) {
+            if (err) {
+                return next(err);
+            }
 
-        return next();
+            res.tpl.bet = results;
+
+            return next();
+        });
+
     };
 
 };

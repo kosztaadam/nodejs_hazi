@@ -13,10 +13,10 @@
     <div>
         <form method="post">
             <div class="form-inline">
-                <%= user.name %>
-                <input type="text" class="form-control input-sm"> HUF
+                <%= user.email %>: <%= user.bank %> HUF modify to:
+                <input type="text" name="bank" id="name" class="form-control input-sm"> HUF
                 <input type="submit" class="btn btn-default btn-sm" value="Modify"/>
-                <a href="admin.html" class="btn btn-default btn-sm">Cancel</a>
+                <a href="/admin" class="btn btn-default btn-sm">Cancel</a>
             </div>
         </form>
     </div>

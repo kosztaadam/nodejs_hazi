@@ -1,13 +1,18 @@
 var mainRedirectMW = require('../middleware/generic/mainRedirect');
-var autMW = require('../middleware/generic/auth');
 var inverseAuthMW = require('../middleware/generic/inverseAuth');
 var checkUserLoginMW = require('../middleware/user/checkUserLogin');
 var checkUserRegistrationMW = require('../middleware/user/checkUserRegistration');
 var logoutMW = require('../middleware/generic/logout');
-var renderMW = require('../middleware/generic/render')
+var renderMW = require('../middleware/generic/render');
+
+var userModel = require('../models/user');
 
 
 module.exports = function (app) {
+
+    var objectRepository = {
+        userModel: userModel
+    };
 
     /**
      * Kezdolap

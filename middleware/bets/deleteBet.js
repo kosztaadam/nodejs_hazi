@@ -5,12 +5,22 @@
 /**
  * Adott fogadasi esemeny torlese
  */
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
 
     return function (req, res, next) {
-        //fogadas id megkeresese
-        //fogadas torlese
-        return next();
+        if (typeof res.tpl.bet === 'undefined') {
+            return next();
+        }
+
+        var bet = res.tpl.bet;
+
+        bet.remove(function (err) {
+            if (err) {
+                return next(err);
+            }
+
+            return next();
+        });
     };
 
 };

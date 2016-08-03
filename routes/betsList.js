@@ -7,44 +7,59 @@ var getAllBetsMW = require('../middleware/bets/getAllBets');
 var getBetMW = require('../middleware/bets/getBet');
 var newUserBetMW = require('../middleware/user-bet/newUserBet');
 var modifyUserMW = require('../middleware/user/modifyUser');
+var getUserMW = require('../middleware/user/getUser');
+var renderMW = require('../middleware/generic/render');
 
-// bejelentkezes ellenorzese
-// osszes fogadasi lehetoseg listazasa
-// uj fogadas
-// profil frissitese (a penz levonasa)
+var betModel = require('../models/bet');
+var userModel = require('../models/user');
+var userBetModel = require('../models/userbet');
 
 module.exports = function (app) {
+
+    var objectRepository = {
+        betModel: betModel,
+        userModel: userModel,
+        userBetModel: userBetModel
+    }
 
     /**
      * Fogadasi esemenyek listazasa
      */
 
     app.use('/bets',
-        autMW(objectrepository),
-        getAllBetsMW(objectrepository),
-        renderMW(objectrepository,'bets')
+        autMW(objectRepository),
+        getAllBetsMW(objectRepository),
+        renderMW(objectRepository,'bets')
     );
 
     /**
      * Uj fogadas felulete
      */
 
-    app.use('/bets/new/:itemid/',
-        autMW(objectrepository),
-        getBetMW(objectrepository),
-        renderMW(objectrepository,'newbet')
+    app.get('/userbet/new/:betid/:betguess',
+        function(req, res, next) {
+            res.tpl.userbetguess = req.params.betguess;
+            return next();
+        },
+        autMW(objectRepository),
+        getBetMW(objectRepository),
+        renderMW(objectRepository,'newbet')
     );
-
 
     /**
      * Uj fogadas
      */
 
-    app.use('/user-bet/new/:guess',
-        autMW(objectrepository),
-        getBetMW(objectrepository),
-        newUserBetMW(objectrepository),
-        modifyUserMW(objectrepository),
+    app.post('/userbet/new/:betid/:betguess',
+        function(req, res, next) {
+            res.tpl.userbetguess = req.params.betguess;
+            return next();
+        },
+        autMW(objectRepository),
+        getBetMW(objectRepository),
+        getUserMW(objectRepository),
+        newUserBetMW(objectRepository),
+        modifyUserMW(objectRepository),
         function (req, res, next) {
             return res.redirect('/profile');
         }

@@ -1,0 +1,130 @@
+<%- include('header') %>
+<%- include('admin_header') %>
+
+<!-- content -->
+<div class="container">
+    <div class="page-header">
+        <h1>Admin page</h1>
+    </div>
+    <div class="page-header">
+        <h3>Bets</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Event</th>
+                    <th class="text-center">User</th>
+                    <th class="text-center">Bet</th>
+                    <th class="text-center">Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% userbet.forEach(function(item){ %>
+                <tr>
+                    <td><%= item.name %></td>
+                    <td class="text-center"><%= item.user %></td>
+                    <td class="text-center"><%= item.guess %></td>
+                    <td class="text-center"><a href="/userbet/<%= item._id %>/delete" class="btn btn-danger btn-xs">Delete</a></td>
+                </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h3>Profiles</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>E-mail</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% users.forEach(function(item){ %>
+                <tr>
+                    <td><%= item.email %></td>
+                    <td class="text-center"><%= item.bank %></td>
+                    <td class="text-center"><a href="/user/<%= item._id %>/modify" class="btn btn-default btn-xs">Modify</a> <a href="/user/<%= item.id %>/delete" class="btn btn-danger btn-xs">Delete</a></td>
+                </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h3>Add bet</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <form method="post">
+                <div class="form-group">
+                    <label for="event">Event</label>
+                    <input type="text" class="form-control" id="event" name="event" placeholder="Event">
+                    <label for="home-odds">Home odds</label>
+                    <input type="number" step="0.1" class="form-control" id="home" name="home" placeholder="Home-odds">
+                    <label for="home-odds">Draw odds</label>
+                    <input type="number" step="0.1" class="form-control" id="draw" name="draw" placeholder="Draw-odds">
+                    <label for="home-odds">Away odds</label>
+                    <input type="number" step="0.1" class="form-control" id="away" name="away" placeholder="Away-odds">
+
+                    <!-- Pelda egy bet-re:
+                    <tr>
+                        <td>Everton - Arsenal, Sat 19 Mar 13:45</td>
+                        <td class="text-center"><a href="newbet.html">2.60</a></td>
+                        <td class="text-center"><a href="newbet.html">3.25</a></td>
+                        <td class="text-center"><a href="newbet.html">2.60</a></td>
+                    </tr>
+                    -->
+                </div>
+                <input type="submit" class="btn btn-primary" value="Add"/>
+            </form>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h3>All events</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th style="width: 30%">Event</th>
+                        <th class="text-center" style="width: 15%">1</th>
+                        <th class="text-center" style="width: 15%">X</th>
+                        <th class="text-center" style="width: 15%">2</th>
+                        <th class="text-center" style="width: 25%">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% bet.forEach(function(item){ %>
+                    <tr>
+                        <td><%= item.name %></td>
+                        <td class="text-center"><%= item.home %>
+                            <a href="/bet/<%= item._id %>/close/1" class="btn btn-danger btn-xs">Close with 1</a></td>
+                        <td class="text-center"><%= item.draw %>
+                            <a href="/bet/<%= item._id %>/close/X" class="btn btn-danger btn-xs">Close with X</a></td>
+                        <td class="text-center"><%= item.away %>
+                            <a href="/bet/<%= item._id %>/close/2" class="btn btn-danger btn-xs">Close with 2</a></td>
+                        <td class="text-center"><a href="/bet/<%= item._id %>/delete" class="btn btn-danger btn-xs">Delete</a></td>
+                    </tr>
+                    <% }); %>
+                    </tbody>
+                </table>
+        </div>
+
+</div>
+<%- include('footer') %>

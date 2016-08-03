@@ -2,10 +2,10 @@
  * Kinezet generalasa
  */
 
-module.exports = function (objectrepository, view) {
+module.exports = function (objectRepository, viewName) {
 
     return function (req, res) {
-        //res.render();
+        res.render(viewName, res.tpl);
     };
 
 };

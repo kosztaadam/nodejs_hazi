@@ -5,9 +5,15 @@
 /**
  * Ha a felhasznalo nincs bejelentkezve, atiranyitjuk /
  */
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
 
     return function (req, res, next) {
+        if (typeof req.session.userid === 'undefined') {
+            return res.redirect('/');
+        }
+
+        res.tpl.userid = req.session.userid;
+
         return next();
     };
 

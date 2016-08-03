@@ -4,6 +4,9 @@
 
 /**
  * Egyenleg modositasa
+ *
+ * Valoszinu nem fog kelleni!
+ *
  */
 module.exports = function (objectrepository) {
 
